@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import img from "./../Img/login-and-sign-up.json";
 import Lottie from "lottie-react";
+import { AuthContext } from "../Context/UserContext";
 const Login = () => {
+  const [error, setError] = useState("");
+  const {user} = useContext(AuthContext)
+  console.log(user)
   const {
     register,
     handleSubmit,
@@ -34,8 +38,14 @@ const Login = () => {
                 className="input input-bordered"
                 type="Email"
                 placeholder="Name"
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: "Email Address is required",
+                })}
+                aria-invalid={errors.email ? "true" : "false"}
               />
+              {errors.email && (
+                <p className="text-red-400 mt-1">{errors.email?.message}</p>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -45,8 +55,14 @@ const Login = () => {
                 className="input input-bordered"
                 type="Password"
                 placeholder="Password"
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: "Password is required",
+                })}
+                aria-invalid={errors.password ? "true" : "false"}
               />
+              {errors.password && (
+                <p className="text-red-400 mt-1">{errors.password?.message}</p>
+              )}
               <label className="label">
                 <Link
                   to="/resetpassword"
@@ -56,7 +72,7 @@ const Login = () => {
                 </Link>
               </label>
             </div>
-
+            {error && <p className="text-red-600">{error}</p>}
             <div className="form-control mt-6">
               <input type="submit" className="btn btn-primary" value="Login" />
             </div>

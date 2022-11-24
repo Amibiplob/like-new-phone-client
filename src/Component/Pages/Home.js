@@ -4,7 +4,7 @@ import Bannar from './Bannar';
 const Home = () => {
     return (
         <div>
-            <Bannar></Bannar>
+            {/* <Bannar></Bannar> */}
         </div>
     );
 };

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import img from './../Img/registration.json'
+import img from "./../Img/registration.json";
 import Lottie from "lottie-react";
 const Register = () => {
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -10,9 +11,9 @@ const Register = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    console.log(data.password.message);
     console.log(data.img[0]);
   };
-  console.log(errors);
 
   return (
     <div className="hero bg-slate-100 py-10">
@@ -24,7 +25,7 @@ const Register = () => {
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <h1 className="text-2xl font-bold text-center">Register Here</h1>
-            <hr/>
+            <hr />
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -33,8 +34,12 @@ const Register = () => {
                 className="input input-bordered"
                 type="Text"
                 placeholder="name"
-                {...register("name", { required: true })}
+                {...register("name", { required: "Name is required" })}
+                aria-invalid={errors.name ? "true" : "false"}
               />
+              {errors.name && (
+                <p className="text-red-400 mt-1">{errors.name?.message}</p>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -45,8 +50,14 @@ const Register = () => {
                 className="input input-bordered"
                 type="Email"
                 placeholder="Name"
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: "Email Address is required",
+                })}
+                aria-invalid={errors.email ? "true" : "false"}
               />
+              {errors.email && (
+                <p className="text-red-400 mt-1">{errors.email?.message}</p>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -56,8 +67,12 @@ const Register = () => {
                 className="input input-bordered"
                 type="Password"
                 placeholder="Password"
-                {...register("password", { required: true })}
+                {...register("password", { required: "Password is required" })}
+                aria-invalid={errors.password ? "true" : "false"}
               />
+              {errors.password && (
+                <p className="text-red-400 mt-1">{errors.password?.message}</p>
+              )}
             </div>
 
             <div className="form-control">
@@ -98,7 +113,7 @@ const Register = () => {
                 </label>
               </div>
             </div>
-
+            {error && <p className="text-red-600">{error}</p>}
             <div className="form-control mt-6">
               <input type="submit" className="btn btn-primary" value="Login" />
             </div>

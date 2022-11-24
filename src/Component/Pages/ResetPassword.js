@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const ResetPassword = () => {
 
@@ -11,6 +12,7 @@ const ResetPassword = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+ toast.error("Password reset email sent!", { autoClose: 1000 });
   };
   console.log(errors);
 
