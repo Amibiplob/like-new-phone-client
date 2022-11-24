@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-
+import img from './../Img/registration.json'
+import Lottie from "lottie-react";
 const Register = () => {
   const {
     register,
@@ -15,13 +15,16 @@ const Register = () => {
   console.log(errors);
 
   return (
-    <div className="hero">
+    <div className="hero bg-slate-100 py-10">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Register now!</h1>
+        <div className="lg:text-left">
+          <h1 className="text-5xl font-bold text-center">Register now!</h1>
+          <Lottie className="w-96" animationData={img} loop={true} />
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <h1 className="text-2xl font-bold text-center">Register Here</h1>
+            <hr/>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -55,11 +58,6 @@ const Register = () => {
                 placeholder="Password"
                 {...register("password", { required: true })}
               />
-              <label className="label">
-                <Link href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </Link>
-              </label>
             </div>
 
             <div className="form-control">

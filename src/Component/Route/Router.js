@@ -3,6 +3,7 @@ import Blog from "../Pages/Blog";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import ResetPassword from "../Pages/ResetPassword";
 import Root from "./Root";
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/resetpassword",
+        element: <ResetPassword></ResetPassword>,
       },
     ],
   },
