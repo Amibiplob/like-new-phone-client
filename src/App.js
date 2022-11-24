@@ -1,6 +1,5 @@
-import Footer from "./Pages/Footer";
-import Navbar from "./Pages/Navbar";
-import Dashboard from "./Pages/Dashboard/Dashboard";
+import { RouterProvider } from "react-router-dom";
+import router from "./Component/Route/Router";
 
 
 
@@ -8,9 +7,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 function App() {
   return (
     <div className="md:mx-10">
-      <Navbar></Navbar>
-      <Dashboard></Dashboard>
-      <Footer></Footer>
+     <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
