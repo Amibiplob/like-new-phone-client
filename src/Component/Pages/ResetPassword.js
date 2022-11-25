@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { getAuth, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
+import app from '../Firebase/Firebase.init';
 
 const ResetPassword = () => {
-
+  const [error, setError] = useState("");
 
   const {
     register,
@@ -11,8 +13,24 @@ const ResetPassword = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
- toast.error("Password reset email sent!", { autoClose: 1000 });
+    const email = data.email;
+
+
+const auth = getAuth(app);
+sendPasswordResetEmail(auth, email)
+  .then(() => {
+    // Password reset email sent!
+    toast.info("Password reset email sent!", { autoClose: 1000 });
+
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setError(errorCode);
+    toast.error(errorMessage);
+  });
+
+
   };
   console.log(errors);
 
@@ -23,7 +41,7 @@ const ResetPassword = () => {
 
     return (
       <div className="flex justify-center bg-slate-100 py-20">
-        <div className='w-3/4 md:w-2/4 lg:w-1/4'>
+        <div className="w-3/4 md:w-2/4 lg:w-1/4">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <h1 className="text-2xl font-bold text-center">
               Reset Password Here
@@ -41,7 +59,7 @@ const ResetPassword = () => {
                 {...register("email", { required: true })}
               />
             </div>
-
+            {error && <p className="text-red-600">{error}</p>}
             <div className="form-control mt-6">
               <input type="submit" className="btn" value="Reset Password" />
             </div>
