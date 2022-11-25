@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import img from "./../Img/registration.json";
 import Lottie from "lottie-react";
 import { toast } from "react-toastify";
 import app from "../Firebase/Firebase.init";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
+import { AuthContext } from "../Context/UserContext";
+import { Link } from "react-router-dom";
+const auth = getAuth(app);
 const Register = () => {
   const [error, setError] = useState("");
+  const { createUser } = useContext(AuthContext);
   const imgbbKey = process.env.REACT_APP_imgbb_key;
   const {
     register,
@@ -36,21 +36,20 @@ const Register = () => {
         toast.error(error);
       });
 
-    const auth = getAuth(app);
-    createUserWithEmailAndPassword(auth, email, password)
+    createUser(email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         toast.success("Profile updated", { autoClose: 1000 });
         console.log(user);
-        
+
         updateProfile(auth.currentUser, {
           displayName: name,
-          photoURL: "https://example.com/jane-q-user/profile.jpg",
+          photoURL: "https://i.ibb.co/RygCB0T/avatar.png",
         })
-        .then(() => {
-          // Profile updated!
-          toast.success("HI" + " , "+ user.displayName, { autoClose: 1000 });
+          .then(() => {
+            // Profile updated!
+            toast.success("Hi , " + user.displayName, { autoClose: 5000 });
           })
           .catch((error) => {
             // An error occurred
@@ -167,6 +166,12 @@ const Register = () => {
             <div className="form-control mt-6">
               <input type="submit" className="btn btn-primary" value="Login" />
             </div>
+            <h1 className="text-center">
+              Already have an account?
+              <Link to="/login" className="link">
+                Log in
+              </Link>
+            </h1>
           </form>
         </div>
       </div>

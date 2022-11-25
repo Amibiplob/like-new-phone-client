@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { getAuth, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
-import app from '../Firebase/Firebase.init';
+import { AuthContext } from '../Context/UserContext';
 
 const ResetPassword = () => {
   const [error, setError] = useState("");
-
+  const { resetPassword} = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -16,11 +15,10 @@ const ResetPassword = () => {
     const email = data.email;
 
 
-const auth = getAuth(app);
-sendPasswordResetEmail(auth, email)
+resetPassword( email)
   .then(() => {
     // Password reset email sent!
-    toast.info("Password reset email sent!", { autoClose: 1000 });
+    toast.info("Password reset email sent!", { autoClose: 2000 });
 
   })
   .catch((error) => {
