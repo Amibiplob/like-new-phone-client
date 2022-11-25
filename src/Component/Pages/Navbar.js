@@ -1,21 +1,15 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Bars3Icon } from "@heroicons/react/24/solid";
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100">
-      <div className="flex-none lg:hidden">
-        <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost">
-          <Bars3Icon className="h-6 w-6" />
-        </label>
-      </div>
+    <div className="navbar bg-slate-200">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          daisyUI
+         Like New Phone
         </Link>
       </div>
       <div className="flex-none">
-        <ul className="flex gap-3">
+        <ul className="flex">
           <li className="tooltip tooltip-bottom" data-tip="Home">
             <NavLink to="/home">
               {({ isActive }) => (
@@ -89,7 +83,7 @@ const Navbar = () => {
           className="shadow menu menu-compact dropdown-content bg-base-100 rounded-xl w-52"
         >
           <li className="bg-slate-200 hover:bg-slate-300 py-1 pl-4 text-center">
-       biplob
+            biplob
           </li>
           <li>
             <Link to="/" className="justify-between">
@@ -98,7 +92,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">Settings</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
             <Link to="/">Logout</Link>
