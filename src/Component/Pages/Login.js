@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import img from "./../Img/login-and-sign-up.json";
 import Lottie from "lottie-react";
 import { AuthContext } from "../Context/UserContext";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
+const auth = getAuth();
 const Login = () => {
   const [error, setError] = useState("");
   const {user} = useContext(AuthContext)
@@ -14,9 +17,29 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+
+     const password = data.password;
+     const email = data.email;
+
+
+
+
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+   toast.success("HI" + " , " + user.displayName, { autoClose: 1000 });
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+            setError(errorCode);
+            toast.error(errorMessage);
+
+  });
+
+
   };
-  console.log(errors);
 
   return (
     <div className="hero bg-slate-100 py-14">

@@ -2,17 +2,67 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import img from "./../Img/registration.json";
 import Lottie from "lottie-react";
+import { toast } from "react-toastify";
+import app from "../Firebase/Firebase.init";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 const Register = () => {
   const [error, setError] = useState("");
+  const imgbbKey = process.env.REACT_APP_imgbb_key;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(data.password.message);
-    console.log(data.img[0]);
+    const name = data.name;
+    const password = data.password;
+    const email = data.email;
+
+    const image = new FormData();
+    image.append("image", data.img[0]);
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+      method: "PUT",
+      body: image,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+
+    const auth = getAuth(app);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        toast.success("Profile updated", { autoClose: 1000 });
+        console.log(user);
+        
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: "https://example.com/jane-q-user/profile.jpg",
+        })
+        .then(() => {
+          // Profile updated!
+          toast.success("HI" + " , "+ user.displayName, { autoClose: 1000 });
+          })
+          .catch((error) => {
+            // An error occurred
+            toast.success(error, { autoClose: 1000 });
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorCode);
+        toast.error(errorMessage);
+      });
   };
 
   return (
