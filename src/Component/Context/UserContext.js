@@ -4,6 +4,7 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import React, { createContext, useState } from "react";
 import app from "../Firebase/Firebase.init";
@@ -27,6 +28,9 @@ const [loader,setLoader] =useState(true)
   const githubSignin = (githubProvider) => {
     return signInWithPopup(auth, githubProvider);
   };
+  const logOut = () => {
+    return signOut(auth);
+  };
 
   const authInfo = {
     user,
@@ -35,6 +39,7 @@ const [loader,setLoader] =useState(true)
     resetPassword,
     googleSignin,
     githubSignin,
+    logOut,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

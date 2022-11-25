@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthContext } from "../Context/UserContext";
 const Navbar = () => {
+  const { logOut } = useContext(AuthContext);
+  const logout = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+        toast.success("Sign-out successful", { autoClose: 2000 });
+      })
+      .catch((error) => {
+        // An error happened.
+        toast.error(error, { autoClose: 2000 });
+      });
+  };
   return (
     <div className="navbar bg-slate-200">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-         Like New Phone
+          Like New Phone
         </Link>
       </div>
       <div className="flex-none">
@@ -94,7 +108,7 @@ const Navbar = () => {
           <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
-          <li>
+          <li onClick={logout}>
             <Link to="/">Logout</Link>
           </li>
         </ul>
