@@ -5,12 +5,13 @@ import img from "./../Img/login-and-sign-up.json";
 import Lottie from "lottie-react";
 import { AuthContext } from "../Context/UserContext";
 import { toast } from "react-toastify";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
   const [error, setError] = useState("");
   const [socialError, setSocialError] = useState("");
-  const { loginUser, user, googleSignin } = useContext(AuthContext);
+  const { loginUser, user, googleSignin, githubSignin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
   const {
     register,
     handleSubmit,
@@ -33,7 +34,7 @@ const Login = () => {
         toast.error(errorMessage);
       });
   };
-  const googleWithSignin = () => {
+  const SigninWithGoogle = () => {
     googleSignin(googleProvider)
       .then((result) => {
         const user = result.user;
@@ -43,15 +44,27 @@ const Login = () => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
         setSocialError(errorCode);
         toast.error(errorMessage);
-        console.log(email);
+ 
       });
   };
-
+const SigninWithGithub =()=>{
+  githubSignin(githubProvider)
+    .then((result) => {
+  
+      // The signed-in user info.
+      const user = result.user;
+       toast.success("Hi , " + user.displayName, { autoClose: 5000 });
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+     setSocialError(errorCode);
+     toast.error(errorMessage);
+    });
+}
   return (
     <div className="hero bg-slate-100 py-14">
       <div className="hero-content flex-col lg:flex-row">
@@ -113,10 +126,12 @@ const Login = () => {
           </form>
           <div className="card-body pt-2">
             <div className="divider mb-2">Login with social accounts</div>
-            {socialError && <p className="text-red-600 text-center">{socialError}</p>}
+            {socialError && (
+              <p className="text-red-600 text-center">{socialError}</p>
+            )}
             <div className="flex justify-evenly my-3">
               <button
-                onClick={googleWithSignin}
+                onClick={SigninWithGoogle}
                 className="btn btn-ghost normal-case bg-slate-300 flex gap-2 px-2"
               >
                 <svg
@@ -128,7 +143,10 @@ const Login = () => {
                 </svg>
                 <span>Google</span>
               </button>
-              <button className="btn btn-ghost normal-case bg-slate-300 flex gap-2 px-2">
+              <button
+                onClick={SigninWithGithub}
+                className="btn btn-ghost normal-case bg-slate-300 flex gap-2 px-2"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 32 32"
