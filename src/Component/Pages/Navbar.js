@@ -111,7 +111,7 @@ const Navbar = () => {
                 Hi , {user?.displayName}
               </li>
               <li>
-                <Link to="/" className="justify-between">
+                <Link to="/dashboard/profile" className="justify-between">
                   Profile
                   <span className="badge">New</span>
                 </Link>
