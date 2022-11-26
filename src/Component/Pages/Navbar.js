@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/UserContext";
 const Navbar = () => {
-  const { logOut } = useContext(AuthContext);
+  const { logOut,user } = useContext(AuthContext);
   const logout = () => {
     logOut()
       .then(() => {
@@ -54,65 +54,78 @@ const Navbar = () => {
               )}
             </NavLink>
           </li>
-          <li className="tooltip tooltip-bottom" data-tip="login">
-            <NavLink to="/login">
-              {({ isActive }) => (
-                <span
-                  className={
-                    isActive
-                      ? "bg-blue-100 text-blue-600 hover:text-blue-800 round px-2 py-1 rounded-lg"
-                      : "px-2 py-1 hover:bg-blue-100"
-                  }
-                >
-                  Login
-                </span>
-              )}
-            </NavLink>
-          </li>
-          <li className="tooltip tooltip-bottom" data-tip="Register">
-            <NavLink to="/register">
-              {({ isActive }) => (
-                <span
-                  className={
-                    isActive
-                      ? "bg-blue-100 text-blue-600 hover:text-blue-800 round px-2 py-1 rounded-lg"
-                      : "px-2 py-1 hover:bg-blue-100"
-                  }
-                >
-                  Register
-                </span>
-              )}
-            </NavLink>
-          </li>
+          {!user?.displayName && (
+            <>
+              <li className="tooltip tooltip-bottom" data-tip="login">
+                <NavLink to="/login">
+                  {({ isActive }) => (
+                    <span
+                      className={
+                        isActive
+                          ? "bg-blue-100 text-blue-600 hover:text-blue-800 round px-2 py-1 rounded-lg"
+                          : "px-2 py-1 hover:bg-blue-100"
+                      }
+                    >
+                      Login
+                    </span>
+                  )}
+                </NavLink>
+              </li>
+              <li className="tooltip tooltip-bottom" data-tip="Register">
+                <NavLink to="/register">
+                  {({ isActive }) => (
+                    <span
+                      className={
+                        isActive
+                          ? "bg-blue-100 text-blue-600 hover:text-blue-800 round px-2 py-1 rounded-lg"
+                          : "px-2 py-1 hover:bg-blue-100"
+                      }
+                    >
+                      Register
+                    </span>
+                  )}
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
-      <div tabIndex={0} className="dropdown dropdown-hover dropdown-end">
-        <label className="btn btn-ghost btn-circle avatar">
-          <div className="w-10 rounded-full">
-            <img src="https://placeimg.com/80/80/people" alt="" />
+      {user?.displayName && (
+        <>
+          <div tabIndex={0} className="dropdown dropdown-hover dropdown-end">
+            <label className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img
+                  src={
+                    user ? user.photoURL : "https://i.ibb.co/RygCB0T/avatar.png"
+                  }
+                  alt=""
+                />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="shadow menu menu-compact dropdown-content bg-base-100 rounded-xl w-52"
+            >
+              <li className="bg-slate-200 hover:bg-slate-300 py-1 pl-4 text-center">
+                Hi , {user?.displayName}
+              </li>
+              <li>
+                <Link to="/" className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li onClick={logout}>
+                <Link to="/">Logout</Link>
+              </li>
+            </ul>
           </div>
-        </label>
-        <ul
-          tabIndex={0}
-          className="shadow menu menu-compact dropdown-content bg-base-100 rounded-xl w-52"
-        >
-          <li className="bg-slate-200 hover:bg-slate-300 py-1 pl-4 text-center">
-            biplob
-          </li>
-          <li>
-            <Link to="/" className="justify-between">
-              Profile
-              <span className="badge">New</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li onClick={logout}>
-            <Link to="/">Logout</Link>
-          </li>
-        </ul>
-      </div>
+        </>
+      )}
     </div>
   );
 };

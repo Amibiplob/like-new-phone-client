@@ -12,11 +12,17 @@ const Register = () => {
   const [error, setError] = useState("");
   const { createUser } = useContext(AuthContext);
   const imgbbKey = process.env.REACT_APP_imgbb_key;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+    const {
+      register,
+      resetField,
+      handleSubmit,
+      formState: { errors },
+    } = useForm({
+      mode: "onChange",
+      defaultValues: {
+        firstName: "",
+      },
+    });
   const onSubmit = (data) => {
     const name = data.name;
     const password = data.password;
@@ -42,7 +48,9 @@ const Register = () => {
         const user = userCredential.user;
         toast.success("Profile updated", { autoClose: 1000 });
         console.log(user);
-
+           resetField("name");
+           resetField("email");
+           resetField("password");
         updateProfile(auth.currentUser, {
           displayName: name,
           photoURL: "https://i.ibb.co/RygCB0T/avatar.png",

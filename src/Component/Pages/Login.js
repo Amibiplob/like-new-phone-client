@@ -12,18 +12,28 @@ const Login = () => {
   const { loginUser, user, googleSignin, githubSignin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+console.log(user)
+
+
+    const {
+      register,
+      resetField,
+      handleSubmit,
+      formState: { errors },
+    } = useForm({
+      mode: "onChange",
+      defaultValues: {
+        firstName: "",
+      },
+    });
   const onSubmit = (data) => {
     const password = data.password;
     const email = data.email;
-
     loginUser(email, password)
       .then((userCredential) => {
         // Signed in
+           resetField("email");
+           resetField("password");
         const user = userCredential.user;
         toast.success("Hi , " + user.displayName, { autoClose: 5000 });
       })
@@ -84,7 +94,7 @@ const SigninWithGithub =()=>{
               <input
                 className="input input-bordered"
                 type="Email"
-                placeholder="Name"
+                placeholder="Email"
                 {...register("email", {
                   required: "Email Address is required",
                 })}
