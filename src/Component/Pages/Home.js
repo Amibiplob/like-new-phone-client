@@ -1,11 +1,12 @@
 import React from 'react';
-import Bannar from './Bannar';
+import Category from './Category';
 import Contract from './Contract';
 
 const Home = () => {
     return (
         <div>
             {/* <Bannar></Bannar> */}
+            <Category></Category>
             <Contract></Contract>
         </div>
     );
