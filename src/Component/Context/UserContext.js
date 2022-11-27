@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -37,7 +38,19 @@ const UserContext = ({ children }) => {
   const logOut = () => {
     return signOut(auth);
   };
+  const emailVerify = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
 
+
+
+
+
+
+
+
+
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -57,6 +70,7 @@ const UserContext = ({ children }) => {
     githubSignin,
     logOut,
     loader,
+    emailVerify,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

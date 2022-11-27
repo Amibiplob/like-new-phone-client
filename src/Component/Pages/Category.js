@@ -14,7 +14,7 @@ const Category = () => {
       <h1 className="mb-3 text-3xl">Category</h1>
       <div className="flex gap-5">
       {category.map((data) => (
-          <Link to='/login' className="card card-compact rounded-md bg-base-100 shadow-xl">
+          <Link to='/dashboard/profile' className="card card-compact rounded-md bg-base-100 shadow-xl">
           <figure>
             <img
               className="w-40"

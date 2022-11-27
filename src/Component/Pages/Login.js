@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from "./../Img/login-and-sign-up.json";
 import Lottie from "lottie-react";
 import { AuthContext } from "../Context/UserContext";
@@ -13,8 +13,9 @@ const Login = () => {
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 console.log(user)
-
-
+const navigate =useNavigate();
+const location = useLocation();
+const from = location?.state?.from?.pathname || "/";
     const {
       register,
       resetField,
@@ -36,6 +37,7 @@ console.log(user)
            resetField("password");
         const user = userCredential.user;
         toast.success("Hi , " + user.displayName, { autoClose: 5000 });
+         navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -49,6 +51,7 @@ console.log(user)
       .then((result) => {
         const user = result.user;
         toast.success("Hi , " + user.displayName, { autoClose: 5000 });
+         navigate(from, { replace: true });
       })
       .catch((error) => {
         // Handle Errors here.
@@ -66,6 +69,7 @@ const SigninWithGithub =()=>{
       // The signed-in user info.
       const user = result.user;
        toast.success("Hi , " + user.displayName, { autoClose: 5000 });
+        navigate(from, { replace: true });
     })
     .catch((error) => {
       // Handle Errors here.
