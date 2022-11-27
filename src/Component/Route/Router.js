@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../Pages/Blog";
+import AddProduct from "../Pages/Dashboard/AddProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Profile from "../Pages/Dashboard/Profile";
 import ErrorPage from "../Pages/ErrorPage";
@@ -61,6 +62,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addproduct",
+        element: (
+          <PrivateRoute>
+            <AddProduct></AddProduct>
           </PrivateRoute>
         ),
       },

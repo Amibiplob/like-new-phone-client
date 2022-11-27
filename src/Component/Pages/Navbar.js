@@ -54,7 +54,7 @@ const Navbar = () => {
               )}
             </NavLink>
           </li>
-          {!user?.displayName && (
+          {!user?.uid && (
             <>
               <li className="tooltip tooltip-bottom" data-tip="login">
                 <NavLink to="/login">
@@ -90,7 +90,7 @@ const Navbar = () => {
           )}
         </ul>
       </div>
-      {user?.displayName && (
+      {user?.uid && (
         <>
           <div tabIndex={0} className="dropdown dropdown-hover dropdown-end">
             <label className="btn btn-ghost btn-circle avatar">

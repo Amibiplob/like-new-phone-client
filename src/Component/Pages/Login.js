@@ -9,39 +9,41 @@ import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
   const [error, setError] = useState("");
   const [socialError, setSocialError] = useState("");
-  const { loginUser, user, googleSignin, githubSignin } = useContext(AuthContext);
+  const { loginUser, user, googleSignin, githubSignin, loader, setLoader } =
+    useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
-console.log(user)
-const navigate =useNavigate();
-const location = useLocation();
-const from = location?.state?.from?.pathname || "/";
-    const {
-      register,
-      resetField,
-      handleSubmit,
-      formState: { errors },
-    } = useForm({
-      mode: "onChange",
-      defaultValues: {
-        firstName: "",
-      },
-    });
+  console.log(user);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const {
+    register,
+    resetField,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      firstName: "",
+    },
+  });
   const onSubmit = (data) => {
     const password = data.password;
     const email = data.email;
     loginUser(email, password)
       .then((userCredential) => {
         // Signed in
-           resetField("email");
-           resetField("password");
+        resetField("email");
+        resetField("password");
         const user = userCredential.user;
         toast.success("Hi , " + user.displayName, { autoClose: 5000 });
-         navigate(from, { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setLoader(false);
         setError(errorCode);
         toast.error(errorMessage);
       });
@@ -51,7 +53,7 @@ const from = location?.state?.from?.pathname || "/";
       .then((result) => {
         const user = result.user;
         toast.success("Hi , " + user.displayName, { autoClose: 5000 });
-         navigate(from, { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         // Handle Errors here.
@@ -59,26 +61,26 @@ const from = location?.state?.from?.pathname || "/";
         const errorMessage = error.message;
         setSocialError(errorCode);
         toast.error(errorMessage);
- 
+        setLoader(false);
       });
   };
-const SigninWithGithub =()=>{
-  githubSignin(githubProvider)
-    .then((result) => {
-  
-      // The signed-in user info.
-      const user = result.user;
-       toast.success("Hi , " + user.displayName, { autoClose: 5000 });
+  const SigninWithGithub = () => {
+    githubSignin(githubProvider)
+      .then((result) => {
+        // The signed-in user info.
+        const user = result.user;
+        toast.success("Hi , " + user.displayName, { autoClose: 5000 });
         navigate(from, { replace: true });
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-     setSocialError(errorCode);
-     toast.error(errorMessage);
-    });
-}
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setSocialError(errorCode);
+        toast.error(errorMessage);
+        setLoader(false);
+      });
+  };
   return (
     <div className="hero bg-slate-100 py-14">
       <div className="hero-content flex-col lg:flex-row">
@@ -135,7 +137,11 @@ const SigninWithGithub =()=>{
             </div>
             {error && <p className="text-red-600">{error}</p>}
             <div className="form-control mt-6">
-              <input type="submit" className="btn btn-primary" value="Login" />
+              <input
+                type="submit"
+                className="btn btn-primary"
+                value={loader ? "Loading..." : "Login"}
+              />
             </div>
           </form>
           <div className="card-body pt-2">

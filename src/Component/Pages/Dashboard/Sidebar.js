@@ -8,6 +8,9 @@ const Sidebar = () => {
         <Link to="/dashboard/profile" className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200">
       Profile
         </Link>
+        <Link to="/dashboard/addproduct" className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200">
+   Add Product
+        </Link>
 
       </ul>
     </div>

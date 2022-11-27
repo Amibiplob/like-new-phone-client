@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import img from "./../Img/message-sent-successfully-plane.json";
 import Lottie from "lottie-react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../Context/UserContext";
 const Contract = () => {
+  const { user } = useContext(AuthContext);
   const {
     register,
     resetField,
@@ -38,10 +40,10 @@ const Contract = () => {
         resetField("name");
         resetField("email");
         resetField("message");
-       toast.success(
-         "Thank you for contracting us. We will contract very soon.",
-         { autoClose: 2000 }
-       );
+        toast.success(
+          "Thank you for contracting us. We will contract very soon.",
+          { autoClose: 2000 }
+        );
       });
   };
 
@@ -61,15 +63,28 @@ const Contract = () => {
                   <span className="label-text">Your Name</span>
                 </label>
 
-                <input
-                  className="input input-bordered"
-                  type="text"
-                  placeholder="Name"
-                  {...register("name", {
-                    required: "Name is required",
-                  })}
-                  aria-invalid={errors.name ? "true" : "false"}
-                />
+                {user ? (
+                  <input
+                    value={user?.displayName}
+                    className="input input-bordered"
+                    type="text"
+                    placeholder="Name"
+                    {...register("name", {
+                      required: "Name is required",
+                    })}
+                    aria-invalid={errors.name ? "true" : "false"}
+                  />
+                ) : (
+                  <input
+                    className="input input-bordered"
+                    type="text"
+                    placeholder="Name"
+                    {...register("name", {
+                      required: "Name is required",
+                    })}
+                    aria-invalid={errors.name ? "true" : "false"}
+                  />
+                )}
                 {errors.name && (
                   <p className="text-red-400 mt-1">{errors.name?.message}</p>
                 )}
@@ -79,15 +94,28 @@ const Contract = () => {
                   <span className="label-text">Your Email</span>
                 </label>
 
-                <input
-                  className="input input-bordered"
-                  type="Email"
-                  placeholder="Email"
-                  {...register("email", {
-                    required: "Email Address is required",
-                  })}
-                  aria-invalid={errors.email ? "true" : "false"}
-                />
+                {user ? (
+                  <input
+                    value={user?.email}
+                    className="input input-bordered"
+                    type="Email"
+                    placeholder="Email"
+                    {...register("email", {
+                      required: "Email Address is required",
+                    })}
+                    aria-invalid={errors.email ? "true" : "false"}
+                  />
+                ) : (
+                  <input
+                    className="input input-bordered"
+                    type="Email"
+                    placeholder="Email"
+                    {...register("email", {
+                      required: "Email Address is required",
+                    })}
+                    aria-invalid={errors.email ? "true" : "false"}
+                  />
+                )}
                 {errors.email && (
                   <p className="text-red-400 mt-1">{errors.email?.message}</p>
                 )}

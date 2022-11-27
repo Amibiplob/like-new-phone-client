@@ -6,70 +6,104 @@ import { toast } from "react-toastify";
 import app from "../Firebase/Firebase.init";
 import { getAuth, updateProfile } from "firebase/auth";
 import { AuthContext } from "../Context/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const auth = getAuth(app);
 const Register = () => {
   const [error, setError] = useState("");
-  const { createUser } = useContext(AuthContext);
+  const { createUser, loader, setLoader } = useContext(AuthContext);
   const imgbbKey = process.env.REACT_APP_imgbb_key;
-    const {
-      register,
-      resetField,
-      handleSubmit,
-      formState: { errors },
-    } = useForm({
-      mode: "onChange",
-      defaultValues: {
-        firstName: "",
-      },
-    });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const {
+    register,
+    resetField,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+    },
+  });
   const onSubmit = (data) => {
     const name = data.name;
     const password = data.password;
     const email = data.email;
+    const userRole = data.type;
 
-    const image = new FormData();
-    image.append("image", data.img[0]);
+    const image = data.img[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
     fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-      method: "PUT",
-      body: image,
+      method: "POST",
+      body: formData,
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("Success:", result);
+        const imgUrl = result.data.url;
+
+ createUser(email, password)
+   .then((userCredential) => {
+     // Signed in
+     const user = userCredential.user;
+     toast.success("Profile updated", { autoClose: 1000 });
+     resetField("name");
+     resetField("email");
+     resetField("password");
+     updateProfile(auth.currentUser, {
+       displayName: name,
+       photoURL: imgUrl,
+     })
+       .then(() => {
+         // Profile updated!
+         navigate(from, { replace: true });
+         const userDetails = {
+           Name: name,
+           Email: email,
+           ProfilePic: imgUrl,
+           ProviderId: user.providerId,
+           userRole: userRole,
+           UID: user.uid,
+         };
+
+         fetch("http://localhost:5000/user", {
+           method: "POST",
+           headers: {
+             "content-type": "application/json",
+           },
+           body: JSON.stringify(userDetails),
+         })
+           .then((res) => res.json())
+           .then((data) => {
+             if (data.acknowledged) {
+               toast.success("Hi , " + user.displayName, {
+                 autoClose: 5000,
+               });
+             }
+           });
+       })
+       .catch((error) => {
+         // An error occurred
+         toast.error(error, { autoClose: 1000 });
+       });
+   })
+   .catch((error) => {
+     const errorCode = error.code;
+     const errorMessage = error.message;
+     setError(errorCode);
+     toast.error(errorMessage);
+     setLoader(false);
+   });
+
+
       })
       .catch((error) => {
         toast.error(error);
       });
 
-    createUser(email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        toast.success("Profile updated", { autoClose: 1000 });
-        console.log(user);
-           resetField("name");
-           resetField("email");
-           resetField("password");
-        updateProfile(auth.currentUser, {
-          displayName: name,
-          photoURL: "https://i.ibb.co/RygCB0T/avatar.png",
-        })
-          .then(() => {
-            // Profile updated!
-            toast.success("Hi , " + user.displayName, { autoClose: 5000 });
-          })
-          .catch((error) => {
-            // An error occurred
-            toast.success(error, { autoClose: 1000 });
-          });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorCode);
-        toast.error(errorMessage);
-      });
+   
   };
 
   return (
@@ -140,7 +174,7 @@ const Register = () => {
                 type="file"
                 accept="image/png, image/jpeg"
                 className="w-full file-input-md file-input bg-slate-200"
-                {...register("img")}
+                {...register("img",{ required: true })}
               />
             </div>
 
@@ -172,7 +206,11 @@ const Register = () => {
             </div>
             {error && <p className="text-red-600">{error}</p>}
             <div className="form-control mt-6">
-              <input type="submit" className="btn btn-primary" value="Login" />
+              <input
+                type="submit"
+                className="btn btn-primary"
+                value={loader ? "loading...." : "register"}
+              />
             </div>
             <h1 className="text-center">
               Already have an account?
