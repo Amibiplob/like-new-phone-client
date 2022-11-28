@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../Pages/Blog";
 import AddProduct from "../Pages/Dashboard/AddProduct";
+import AllCategory from "../Pages/Dashboard/AllCategory";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyProduct from "../Pages/Dashboard/MyProduct";
 import ProductCategory from "../Pages/Dashboard/ProductCategory";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/resetpassword",
         element: <ResetPassword></ResetPassword>,
+      },
+      {
+        path: "/allcategory",
+        element: <AllCategory></AllCategory>,
       },
     ],
   },

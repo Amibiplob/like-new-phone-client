@@ -54,6 +54,21 @@ const Navbar = () => {
               )}
             </NavLink>
           </li>
+          <li className="tooltip tooltip-bottom" data-tip="All Category">
+            <NavLink to="/allcategory">
+              {({ isActive }) => (
+                <span
+                  className={
+                    isActive
+                      ? "bg-blue-100 text-blue-600 hover:text-blue-800 round px-2 py-1 rounded-lg"
+                      : "px-2 py-1 hover:bg-blue-100"
+                  }
+                >
+                  All Category
+                </span>
+              )}
+            </NavLink>
+          </li>
           {!user?.uid && (
             <>
               <li className="tooltip tooltip-bottom" data-tip="login">

@@ -22,9 +22,12 @@ const Profile = () => {
         <div>
           <div className="flex gap-1">
             <h1 className="text-3xl">Name : {displayName}</h1>
-            <div className="tooltip" data-tip="verify">
-              <CheckBadgeIcon className="h-5 w-5 text-blue-500" />
-            </div>
+            {emailVerified && (
+              <div className="tooltip" data-tip="verify">
+                <CheckBadgeIcon className="h-5 w-5 text-blue-500" />
+              </div>
+            )}
+
             <div className="tooltip" data-tip="Verify">
               <CheckBadgeIcon className="h-5 w-5 text-green-800" />
             </div>
