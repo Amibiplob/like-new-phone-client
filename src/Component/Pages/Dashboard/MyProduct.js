@@ -10,8 +10,8 @@ const MyProduct = () => {
   const date = new Date();
   console.log(date)
   return (
-    <div className="md:w-3/5 p-2">
-      <div className="overflow-scroll mx-auto">
+    <div className="md:max-w-md lg:max-w-3xl xl:max-w-5xl p-3 mx-auto">
+      <div className="overflow-scroll">
         <table className="table table-compact">
           <thead>
             <tr>
@@ -45,7 +45,7 @@ const MyProduct = () => {
                 <th>{data.productType}</th>
                 <th>{data.purchaseDate}</th>
                 <th>{data.useYear}</th>
-                <th>{data.SubmitDate.sp}</th>
+                <th>{data.SubmitDate.slice(0,10)}</th>
                 <th>{data.description}</th>
 
                 <th className="avatar">

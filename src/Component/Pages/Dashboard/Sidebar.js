@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div className="md:w-60 lg:w-80">
-      <ul className="flex md:flex-col flex-row items-center justify-center gap-3 md:gap-1 my-3">
+      <ul className="flex md:flex-col  flex-wrap flex-row items-center justify-center gap-3 md:gap-1 my-3">
         <Link
           to="/dashboard/profile"
           className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"
@@ -21,7 +21,13 @@ const Sidebar = () => {
           to="/dashboard/myproduct"
           className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"
         >
-  My Product
+          My Product
+        </Link>
+        <Link
+          to="/dashboard/productcategory"
+          className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"
+        >
+          Product Category
         </Link>
       </ul>
     </div>

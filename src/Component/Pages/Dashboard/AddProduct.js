@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -17,6 +17,22 @@ const AddProduct = () => {
   } = useForm({
     mode: "onChange",
   });
+
+
+
+
+  const [productCategory, setProductCategory] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/productcategory")
+      .then((res) => res.json())
+      .then((data) => setProductCategory(data));
+  }, []);
+
+
+
+console.log(productCategory)
+
+
   const onSubmit = (data) => {
     const image = data.img[0];
     const formData = new FormData();
@@ -71,7 +87,7 @@ const AddProduct = () => {
   };
   return (
     <div>
-      <div className="mx-5">
+      <div className="">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
           <h1 className="text-2xl font-bold text-center">Add Product</h1>
           <div className="divider m-0"></div>
@@ -254,9 +270,13 @@ const AddProduct = () => {
                 className="input input-bordered"
                 {...register("productCategory", { required: true })}
               >
-                <option value="Good">Good</option>
-                <option value="Better">Better</option>
-                <option value="Best">Best</option>
+                
+             {
+              productCategory.map((data)=>(
+                   <option value="Good">{data.ProductCategory}</option>
+             
+              ))
+             }
               </select>
 
               {errors.productCategory && (

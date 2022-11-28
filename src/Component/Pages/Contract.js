@@ -65,7 +65,7 @@ const Contract = () => {
 
                 {user ? (
                   <input
-                    value={user?.displayName}
+                    defaultValue={user?.displayName}
                     className="input input-bordered"
                     type="text"
                     placeholder="Name"
@@ -96,7 +96,7 @@ const Contract = () => {
 
                 {user ? (
                   <input
-                    value={user?.email}
+                    defaultValue={user?.email}
                     className="input input-bordered"
                     type="Email"
                     placeholder="Email"
