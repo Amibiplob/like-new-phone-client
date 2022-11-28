@@ -8,7 +8,7 @@ const allProduct=useLoaderData([])
     return (
       <div className="grid justify-items-center grid-cols-1 md:grid-cols-3 gap-5 m-5">
         {allProduct.map((data) => (
-          <div className="card w-96 bg-base-300 shadow-xl">
+          <div key={data._id} className="card w-96 bg-base-300 shadow-xl">
             <figure>
               <img
                 className="rounded-xl"
@@ -28,7 +28,7 @@ const allProduct=useLoaderData([])
               <p><span className='font-bold'>Description : </span>{data.description}</p>
 
               <div className="card-actions justify-end">
-                <Link to={`./${data._id}`} className="btn btn-sm bg-green-900">Product Details</Link>
+                <Link to={`../../productdetails/${data._id}`} className="btn btn-sm bg-green-900">Product Details</Link>
               </div>
             </div>
           </div>
