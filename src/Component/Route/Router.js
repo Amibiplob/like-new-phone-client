@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import AllProduct from "../Pages/AllProduct";
 import Blog from "../Pages/Blog";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import AllCategory from "../Pages/Dashboard/AllCategory";
@@ -9,6 +10,7 @@ import Profile from "../Pages/Dashboard/Profile";
 import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
+import ProductDetails from "../Pages/ProductDetails";
 import Register from "../Pages/Register";
 import ResetPassword from "../Pages/ResetPassword";
 import DashboardLayout from "./DashboardLayout";
@@ -48,6 +50,16 @@ const router = createBrowserRouter([
       {
         path: "/allcategory",
         element: <AllCategory></AllCategory>,
+      },
+      {
+        path: "/allproduct/:product",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allproduct/${params.product}`),
+        element: <AllProduct></AllProduct>,
+      },
+      {
+        path: "/allproduct",
+        element: <ProductDetails></ProductDetails>,
       },
     ],
   },

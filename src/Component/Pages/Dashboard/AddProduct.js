@@ -270,13 +270,11 @@ console.log(productCategory)
                 className="input input-bordered"
                 {...register("productCategory", { required: true })}
               >
-                
-             {
-              productCategory.map((data)=>(
-                   <option value="Good">{data.ProductCategory}</option>
-             
-              ))
-             }
+                {productCategory.map((data) => (
+                  <option value={data.ProductCategory}>
+                    {data.ProductCategory}
+                  </option>
+                ))}
               </select>
 
               {errors.productCategory && (
@@ -327,20 +325,19 @@ console.log(productCategory)
               )}
             </div>
           </div>
-       
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Choose a picture</span>
-              </label>
-              <input
-                type="file"
-                accept="image/png, image/jpeg"
-                className="w-full file-input-md file-input bg-slate-200"
-                {...register("img", { required: true })}
-              />
-            </div>
-         
-        
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Choose a picture</span>
+            </label>
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              className="w-full file-input-md file-input bg-slate-200"
+              {...register("img", { required: true })}
+            />
+          </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Your Message/Description</span>

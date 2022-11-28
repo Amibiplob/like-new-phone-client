@@ -7,8 +7,7 @@ const MyProduct = () => {
       .then((res) => res.json())
       .then((data) => setMyProduct(data));
   }, []);
-  const date = new Date();
-  console.log(date)
+
   return (
     <div className="md:max-w-md lg:max-w-3xl xl:max-w-5xl p-3 mx-auto">
       <div className="overflow-scroll">

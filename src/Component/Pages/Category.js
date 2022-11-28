@@ -12,10 +12,11 @@ const Category = () => {
   return (
     <div className="bg-slate-300 p-5">
       <h1 className="mb-3 text-3xl">Category</h1>
-      <div className="flex gap-5">
-        {category.map((data) => (
-          <Link key={data._id}
-            to="/dashboard/profile"
+      <div className="flex flex-wrap justify-center gap-5">
+        {category.slice(0, 6).map((data) => (
+          <Link
+            key={data._id}
+            to={`../allproduct/${data.ProductCategory}`}
             className="card card-compact rounded-md bg-base-100 shadow-xl"
           >
             <figure>
