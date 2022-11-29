@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/UserContext";
+import { SunIcon,MoonIcon } from "@heroicons/react/24/solid";
 const Navbar = () => {
   const { logOut,user } = useContext(AuthContext);
   const logout = () => {
@@ -24,7 +25,7 @@ const Navbar = () => {
       </div>
       <div className="flex-none">
         <ul className="flex">
-          <li className="tooltip tooltip-bottom" data-tip="Home">
+          <li className="tooltip tooltip-bottom z-10" data-tip="Home">
             <NavLink to="/home">
               {({ isActive }) => (
                 <span
@@ -39,7 +40,7 @@ const Navbar = () => {
               )}
             </NavLink>
           </li>
-          <li className="tooltip tooltip-bottom" data-tip="Blog">
+          <li className="tooltip tooltip-bottom z-10" data-tip="Blog">
             <NavLink to="/blog">
               {({ isActive }) => (
                 <span
@@ -54,7 +55,7 @@ const Navbar = () => {
               )}
             </NavLink>
           </li>
-          <li className="tooltip tooltip-bottom" data-tip="All Category">
+          <li className="tooltip tooltip-bottom z-10" data-tip="All Category">
             <NavLink to="/allcategory">
               {({ isActive }) => (
                 <span
@@ -71,7 +72,7 @@ const Navbar = () => {
           </li>
           {!user?.uid && (
             <>
-              <li className="tooltip tooltip-bottom" data-tip="login">
+              <li className="tooltip tooltip-bottom z-10" data-tip="login">
                 <NavLink to="/login">
                   {({ isActive }) => (
                     <span
@@ -86,7 +87,7 @@ const Navbar = () => {
                   )}
                 </NavLink>
               </li>
-              <li className="tooltip tooltip-bottom" data-tip="Register">
+              <li className="tooltip tooltip-bottom z-10" data-tip="Register">
                 <NavLink to="/register">
                   {({ isActive }) => (
                     <span
@@ -103,6 +104,14 @@ const Navbar = () => {
               </li>
             </>
           )}
+          <li>
+            <label className="swap swap-rotate">
+              <input type="checkbox" />
+
+              <MoonIcon className="swap-on fill-current w-6 h-6 mx-2 my-1" />
+              <SunIcon className="swap-off fill-current w-6 h-6 mx-2 my-1" />
+            </label>
+          </li>
         </ul>
       </div>
       {user?.uid && (
