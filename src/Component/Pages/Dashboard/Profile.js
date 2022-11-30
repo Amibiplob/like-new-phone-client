@@ -1,10 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/UserContext";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 const Profile = () => {
   const { user, emailVerify } = useContext(AuthContext);
   const { displayName, email, emailVerified, photoURL, uid } = user;
+
+
+  const [dbUser, setDbUser] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/dbuser?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => setDbUser(data));
+  }, [email]);
+
   const verify = () => {
     emailVerify().then(() => {
       // Email verification sent!
@@ -48,6 +57,10 @@ const Profile = () => {
               )}
             </h1>
           )}
+
+          {dbUser.map((data) => (
+            <h1 key={data.userRole}>Your Account: {data.userRole}</h1>
+          ))}
         </div>
       </div>
     </div>

@@ -30,15 +30,7 @@ const MyProduct = () => {
   };
   return (
     <div className="md:max-w-md lg:max-w-3xl xl:max-w-5xl p-3 mx-auto">
-      {myProduct.length === 0 && (
-        <div className="flex flex-col items-center">
-          <Lottie className="w-96" animationData={img} loop={true} />
-          <h1 className="text-3xl  text-center">No Data Found</h1>
-        </div>
-      )}
-
-      {(myProduct.length !== 0) &
-      (
+      {myProduct.length ? (
         <div className="overflow-scroll">
           <table className="table table-compact">
             <thead>
@@ -112,6 +104,11 @@ const MyProduct = () => {
               </tr>
             </tfoot>
           </table>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center">
+          <Lottie className="w-96" animationData={img} loop={true} />
+          <h1 className="text-3xl  text-center">No Data Found</h1>
         </div>
       )}
     </div>

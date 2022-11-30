@@ -16,12 +16,14 @@ console.log(isAdmin)
         >
           Profile
         </Link>
-        <Link
-          to="/dashboard/myorders"
-          className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"
-        >
-          My orders
-        </Link>
+        {isAdmin === "Normal" && (
+          <Link
+            to="/dashboard/myorders"
+            className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"
+          >
+            My orders
+          </Link>
+        )}
 
         {isAdmin === "Seller" && (
           <>
@@ -42,6 +44,18 @@ console.log(isAdmin)
 
         {isAdmin === "admin" && (
           <>
+            <Link
+              to="/dashboard/allbuyer"
+              className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"
+            >
+      All Buyer
+            </Link>
+            <Link
+              to="/dashboard/allseller"
+              className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"
+            >
+        All Seller
+            </Link>
             <Link
               to="/dashboard/productcategory"
               className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"
