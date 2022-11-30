@@ -1,3 +1,6 @@
+### Admin Email-biplob@biplob.com
+### Admin Pass-123456
+
 # Like New Phone Repository
 
 A simple React app.
