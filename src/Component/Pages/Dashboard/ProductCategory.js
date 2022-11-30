@@ -5,9 +5,6 @@ import { toast } from "react-toastify";
 const ProductCategory = () => {
   const imgbbKey = process.env.REACT_APP_imgbb_key;
 
-
-
-
   const {
     register,
     resetField,
@@ -20,13 +17,8 @@ const ProductCategory = () => {
     },
   });
 
-
-
   const onSubmit = (data) => {
-
-
-
- const image = data.img[0];
+    const image = data.img[0];
     const formData = new FormData();
     formData.append("image", image);
 
@@ -55,18 +47,7 @@ const ProductCategory = () => {
             toast.success("Product Category Added", { autoClose: 2000 });
           });
       });
-
-
-
-      
-
-      
-
-
-
-
   };
-  console.log(errors);
 
   return (
     <div className="flex justify-center bg-slate-100 py-20">

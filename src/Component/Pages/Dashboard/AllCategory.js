@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const AllCategory = () => {
   const [allCategory, setAllCategory] = useState([]);
@@ -8,9 +8,9 @@ const AllCategory = () => {
       .then((res) => res.json())
       .then((data) => setAllCategory(data));
   }, []);
-  console.log(allCategory);
-  const data = useLoaderData([]);
-  console.log(data)
+
+  
+
   return (
     <div>
       <h1 className="text-2xl text-center my-5"> All Category</h1>

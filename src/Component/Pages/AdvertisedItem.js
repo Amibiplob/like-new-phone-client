@@ -8,7 +8,7 @@ const AdvertisedItem = () => {
      .then((res) => res.json())
      .then((data) => setAdvertisedItem(data));
  }, []);
- console.log(advertisedItem)
+
  return (
     <div>
 {

@@ -5,7 +5,7 @@ import img from "./../Img/loading.json"
 const AllProduct = () => {
 
 const allProduct=useLoaderData([])
-console.log(allProduct)
+
     return (
       <div className="grid justify-items-center grid-cols-1 md:grid-cols-3 gap-5 m-5">
         {allProduct.length === 0 && (

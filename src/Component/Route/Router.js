@@ -4,6 +4,7 @@ import Blog from "../Pages/Blog";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import AllCategory from "../Pages/Dashboard/AllCategory";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import MyOrders from "../Pages/Dashboard/MyOrders";
 import MyProduct from "../Pages/Dashboard/MyProduct";
 import ProductCategory from "../Pages/Dashboard/ProductCategory";
 import Profile from "../Pages/Dashboard/Profile";
@@ -13,6 +14,7 @@ import Login from "../Pages/Login";
 import ProductDetails from "../Pages/ProductDetails";
 import Register from "../Pages/Register";
 import ResetPassword from "../Pages/ResetPassword";
+import AdminRoute from "./AdminRoute";
 import DashboardLayout from "./DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import Root from "./Root";
@@ -105,9 +107,17 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/productcategory",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <ProductCategory></ProductCategory>
-          </PrivateRoute>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/Myorders",
+        element: (
+
+          <MyOrders></MyOrders>
+
         ),
       },
     ],

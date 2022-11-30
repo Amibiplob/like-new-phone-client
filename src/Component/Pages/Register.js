@@ -140,7 +140,7 @@ const Register = () => {
               <input
                 className="input input-bordered"
                 type="Email"
-                placeholder="Name"
+                placeholder="Email"
                 {...register("email", {
                   required: "Email Address is required",
                 })}

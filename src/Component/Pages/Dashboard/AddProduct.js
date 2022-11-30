@@ -30,8 +30,6 @@ const AddProduct = () => {
 
 
 
-console.log(productCategory)
-
 
   const onSubmit = (data) => {
     const image = data.img[0];
@@ -81,7 +79,7 @@ console.log(productCategory)
             resetField("purchaseDate");
             resetField("useYear");
             toast.success("Thank you for Submit Product", { autoClose: 2000 });
-            navigate("/");
+            navigate("/dashboard/myproduct");
           });
       });
   };
@@ -271,7 +269,7 @@ console.log(productCategory)
                 {...register("productCategory", { required: true })}
               >
                 {productCategory.map((data) => (
-                  <option value={data.ProductCategory}>
+                  <option key={data.productCategory} value={data.ProductCategory}>
                     {data.ProductCategory}
                   </option>
                 ))}

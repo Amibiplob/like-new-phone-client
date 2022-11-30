@@ -9,11 +9,10 @@ import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
   const [error, setError] = useState("");
   const [socialError, setSocialError] = useState("");
-  const { loginUser, user, googleSignin, githubSignin, loader, setLoader } =
+  const { loginUser, googleSignin, githubSignin, loader, setLoader } =
     useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
-  console.log(user);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";

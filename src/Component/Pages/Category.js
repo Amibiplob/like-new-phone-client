@@ -8,7 +8,7 @@ const Category = () => {
     .then((res)=>res.json())
     .then((data)=>setCategory(data))
   }, []);
-  console.log(category)
+
   return (
     <div className="bg-slate-300 p-5 my-5">
       <h1 className="mb-3 text-3xl">Category</h1>
