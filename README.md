@@ -1,6 +1,6 @@
 adminEmail: biplob@biplob.com
 
-adminPassword: 123456>
+adminPassword: 123456
 
 
 
