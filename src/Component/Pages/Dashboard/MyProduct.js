@@ -9,13 +9,13 @@ const MyProduct = () => {
   const [myProduct, setMyProduct] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myproduct?email=${user.email}`)
+    fetch(`https://like-new-phone.vercel.app/myproduct?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setMyProduct(data));
   }, [user.email]);
   const navigate = useNavigate();
   const advertisedItem = (advertisedproduct) => {
-    fetch("http://localhost:5000/AdvertisedItem", {
+    fetch("https://like-new-phone.vercel.app/AdvertisedItem", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -42,7 +42,7 @@ const allProduct=useLoaderData([])
                 {data.number}
               </p>
               <p>
-                <span className="font-bold">Product Price : $</span>
+                <span className="font-bold">Product Price : BDT</span>
                 {data.productPrice}
               </p>
 

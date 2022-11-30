@@ -6,10 +6,9 @@ const useAdmin = (email) => {
 console.log(isAdmin)
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/admin/user?email=${email}`)
+      fetch(`https://like-new-phone.vercel.app/admin/user?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
-
           setIsAdmin(data[0].userRole);
           setIsAdminLoading(false);
         });

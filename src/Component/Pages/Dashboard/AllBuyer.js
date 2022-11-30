@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const AllBuyer = () => {
   const [allBuyer, setAllBuyer] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/allbuyer")
+    fetch("https://like-new-phone.vercel.app/allbuyer")
       .then((res) => res.json())
       .then((data) => setAllBuyer(data));
   }, []);

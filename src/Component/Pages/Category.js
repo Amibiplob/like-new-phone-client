@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const Category = () => {
   const [category, setCategory] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/productcategory")
-    .then((res)=>res.json())
-    .then((data)=>setCategory(data))
+    fetch("https://like-new-phone.vercel.app/productcategory")
+      .then((res) => res.json())
+      .then((data) => setCategory(data));
   }, []);
 
   return (

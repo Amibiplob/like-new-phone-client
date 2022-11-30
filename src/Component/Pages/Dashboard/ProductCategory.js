@@ -33,7 +33,7 @@ const ProductCategory = () => {
           CategoryImg: result.data.url,
         };
 
-        fetch("http://localhost:5000/productcategory", {
+        fetch("https://like-new-phone.vercel.app/productcategory", {
           method: "POST",
           headers: {
             "content-type": "application/json",

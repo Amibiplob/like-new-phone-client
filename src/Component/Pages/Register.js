@@ -68,7 +68,7 @@ const Register = () => {
            UID: user.uid,
          };
 
-         fetch("http://localhost:5000/user", {
+         fetch("https://like-new-phone.vercel.app/user", {
            method: "POST",
            headers: {
              "content-type": "application/json",

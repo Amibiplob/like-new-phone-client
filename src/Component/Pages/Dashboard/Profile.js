@@ -9,7 +9,7 @@ const Profile = () => {
 
   const [dbUser, setDbUser] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/dbuser?email=${email}`)
+    fetch(`https://like-new-phone.vercel.app/dbuser?email=${email}`)
       .then((res) => res.json())
       .then((data) => setDbUser(data));
   }, [email]);

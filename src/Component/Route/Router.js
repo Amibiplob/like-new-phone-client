@@ -60,13 +60,17 @@ const router = createBrowserRouter([
       {
         path: "/allproduct/:product",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allproduct/${params.product}`),
+          fetch(
+            `https://like-new-phone.vercel.app/allproduct/${params.product}`
+          ),
         element: <AllProduct></AllProduct>,
       },
       {
         path: "/productdetails/:product",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/productdetails/${params.product}`),
+          fetch(
+            `https://like-new-phone.vercel.app/productdetails/${params.product}`
+          ),
         element: <ProductDetails></ProductDetails>,
       },
     ],

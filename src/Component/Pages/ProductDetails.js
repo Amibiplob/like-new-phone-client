@@ -27,7 +27,7 @@ console.log(buyerNumber)
     };
 
 if(buyerNumber && mettingLocation){
-      fetch("http://localhost:5000/myorders", {
+      fetch("https://like-new-phone.vercel.app/myorders", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -92,7 +92,7 @@ else{
                 {data.number}
               </p>
               <p>
-                <span className="font-bold">Product Price : $</span>
+                <span className="font-bold">Product Price : BDT</span>
                 {data.productPrice}
               </p>
 

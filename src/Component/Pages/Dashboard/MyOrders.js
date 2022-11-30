@@ -8,7 +8,7 @@ const MyOrders = () => {
 
   const [myOrders, setMyOrders] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/myorders?email=${user.email}`)
+    fetch(`https://like-new-phone.vercel.app/myorders?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setMyOrders(data));
   }, [user.email]);
@@ -17,7 +17,7 @@ const MyOrders = () => {
 
   const pay = (data) => {
     console.log(data);
-    fetch(`http://localhost:5000/myorders?id=${data}`, {
+    fetch(`https://like-new-phone.vercel.app/myorders?id=${data}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -28,30 +28,23 @@ const MyOrders = () => {
       .then((data) => {
         console.log(data);
 
+        fetch(`https://like-new-phone.vercel.app/AdvertisedItem?id=${data}`, {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
 
-
-
-
-    fetch(`http://localhost:5000/AdvertisedItem?id=${data}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-
-        
         toast.success("Payment Confirm", { autoClose: 2000 });
 
-            fetch(`http://localhost:5000/myorders?email=${user.email}`)
-              .then((res) => res.json())
-              .then((data) => setMyOrders(data));
-        
-
+        fetch(`https://like-new-phone.vercel.app/myorders?email=${user.email}`)
+          .then((res) => res.json())
+          .then((data) => setMyOrders(data));
       });
   };
 

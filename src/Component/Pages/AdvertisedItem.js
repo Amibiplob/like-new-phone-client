@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const AdvertisedItem = () => {
  const [advertisedItem, setAdvertisedItem] = useState([]);
  useEffect(() => {
-   fetch("http://localhost:5000/AdvertisedItem")
+   fetch("https://like-new-phone.vercel.app/AdvertisedItem")
      .then((res) => res.json())
      .then((data) => setAdvertisedItem(data));
  }, []);

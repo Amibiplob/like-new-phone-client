@@ -28,7 +28,7 @@ const Contract = () => {
       Message: message,
     };
 
-    fetch("http://localhost:5000/contract", {
+    fetch("https://like-new-phone.vercel.app/contract", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -23,7 +23,7 @@ const AddProduct = () => {
 
   const [productCategory, setProductCategory] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/productcategory")
+    fetch("https://like-new-phone.vercel.app/productcategory")
       .then((res) => res.json())
       .then((data) => setProductCategory(data));
   }, []);
@@ -58,7 +58,7 @@ const AddProduct = () => {
           ProductImg: result.data.url,
         };
 
-        fetch("http://localhost:5000/product", {
+        fetch("https://like-new-phone.vercel.app/product", {
           method: "POST",
           headers: {
             "content-type": "application/json",

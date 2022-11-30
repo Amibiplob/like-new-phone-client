@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 const AllCategory = () => {
   const [allCategory, setAllCategory] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/productcategory")
+    fetch("https://like-new-phone.vercel.app/productcategory")
       .then((res) => res.json())
       .then((data) => setAllCategory(data));
   }, []);
