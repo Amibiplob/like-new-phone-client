@@ -8,7 +8,7 @@ const AllBuyer = () => {
       .then((data) => setAllBuyer(data));
   }, []);
 
-  console.log(allBuyer);
+
   return (
     <div>
       <div className="overflow-x-auto">

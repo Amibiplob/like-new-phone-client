@@ -9,7 +9,7 @@ const ProductDetails = () => {
   const [buyerNumber, setBuyerNumber] = useState("");
   const { user } = useContext(AuthContext);
   const { displayName, email: userEmail } = user;
-console.log(buyerNumber)
+
     const handleNumber = (e) => {
       setBuyerNumber(e.target.value);
     };

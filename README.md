@@ -1,5 +1,8 @@
-### Admin Email-biplob@biplob.com
-### Admin Pass-123456
+adminEmail: biplob@biplob.com
+
+adminPassword: 123456>
+
+
 
 # Like New Phone Repository
 

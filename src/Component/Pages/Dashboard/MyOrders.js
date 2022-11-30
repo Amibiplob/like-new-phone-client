@@ -13,10 +13,9 @@ const MyOrders = () => {
       .then((data) => setMyOrders(data));
   }, [user.email]);
 
-  console.log(myOrders);
 
   const pay = (data) => {
-    console.log(data);
+
     fetch(`https://like-new-phone.vercel.app/myorders?id=${data}`, {
       method: "PATCH",
       headers: {
@@ -25,8 +24,8 @@ const MyOrders = () => {
       body: JSON.stringify(),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then((mydata) => {
+
 
         fetch(`https://like-new-phone.vercel.app/AdvertisedItem?id=${data}`, {
           method: "DELETE",
@@ -37,8 +36,24 @@ const MyOrders = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+
           });
+
+
+         fetch(`https://like-new-phone.vercel.app/product?id=${data}`, {
+           method: "DELETE",
+           headers: {
+             "content-type": "application/json",
+           },
+           body: JSON.stringify(),
+         })
+           .then((res) => res.json())
+           .then((data) => {});
+
+
+
+
+
 
         toast.success("Payment Confirm", { autoClose: 2000 });
 

@@ -6,7 +6,7 @@ import useAdmin from "../../useAdmin";
 const Sidebar = () => {
  const { user } = useContext(AuthContext);
 const [isAdmin]=useAdmin(user?.email)
-console.log(isAdmin)
+
   return (
     <div className="md:w-60 lg:w-80">
       <ul className="flex md:flex-col  flex-wrap flex-row items-center justify-center gap-3 md:gap-1 my-3">

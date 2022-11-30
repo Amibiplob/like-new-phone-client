@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useAdmin = (email) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAdminLoading, setIsAdminLoading] = useState(true);
-console.log(isAdmin)
+
   useEffect(() => {
     if (email) {
       fetch(`https://like-new-phone.vercel.app/admin/user?email=${email}`)

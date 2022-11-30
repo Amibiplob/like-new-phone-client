@@ -12,7 +12,7 @@ const AllSeller = () => {
 
 
 
-console.log(allSeller)
+
     return (
       <div>
         <div className="overflow-x-auto">
