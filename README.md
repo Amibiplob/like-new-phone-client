@@ -1,9 +1,3 @@
-adminEmail: biplob@biplob.com
-
-adminPassword: 123456
-
-
-
 # Like New Phone Repository
 
 A simple React app.
