@@ -44,12 +44,6 @@ const UserContext = ({ children }) => {
 
 
 
-
-
-
-
-
-
   
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -61,6 +55,10 @@ const UserContext = ({ children }) => {
     };
   }, []);
 
+
+const [darkMode ,setDarkMode]= useState(false)
+
+
   const authInfo = {
     user,
     createUser,
@@ -71,7 +69,9 @@ const UserContext = ({ children }) => {
     logOut,
     loader,
     emailVerify,
-      setLoader,
+    setLoader,
+    darkMode,
+    setDarkMode,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

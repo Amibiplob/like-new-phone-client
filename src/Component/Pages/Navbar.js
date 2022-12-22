@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../Context/UserContext";
 import { SunIcon,MoonIcon } from "@heroicons/react/24/solid";
 const Navbar = () => {
-  const { logOut,user } = useContext(AuthContext);
+  const { logOut, user, setDarkMode } = useContext(AuthContext);
   const logout = () => {
     logOut()
       .then(() => {
@@ -105,11 +105,17 @@ const Navbar = () => {
             </>
           )}
           <li>
-            <label className="swap swap-rotate">
+            <label className="swap">
               <input type="checkbox" />
 
-              <MoonIcon className="swap-on fill-current w-6 h-6 mx-2 my-1" />
-              <SunIcon className="swap-off fill-current w-6 h-6 mx-2 my-1" />
+              <MoonIcon
+                onClick={() => setDarkMode(false)}
+                className="swap-off fill-current w-6 h-6 mx-2 my-1"
+              />
+              <SunIcon
+                onClick={() => setDarkMode(true)}
+                className="swap-on fill-current w-6 h-6 mx-2 my-1"
+              />
             </label>
           </li>
         </ul>
