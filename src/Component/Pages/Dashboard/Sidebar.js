@@ -16,7 +16,7 @@ const [isAdmin]=useAdmin(user?.email)
         >
           Profile
         </Link>
-        {isAdmin === "Normal" && (
+        {isAdmin === "Normal" | user.providerId === "firebase" && (
           <Link
             to="/dashboard/myorders"
             className="p-2 rounded-md btn btn-ghost normal-case text-xl md:w-full bg-slate-200"

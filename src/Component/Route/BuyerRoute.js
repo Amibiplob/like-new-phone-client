@@ -12,6 +12,9 @@ const location = useLocation();
 if (user && isAdmin === "Normal") {
   return children;
 }
+if (user && user.providerId === "firebase") {
+  return children;
+}
 if (loader || isAdminLoading) {
   return (
     <div className="flex items-center justify-center h-96">

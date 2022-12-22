@@ -71,7 +71,11 @@ const router = createBrowserRouter([
           fetch(
             `https://like-new-phone.vercel.app/productdetails/${params.product}`
           ),
-        element: <ProductDetails></ProductDetails>,
+        element: (
+          <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },

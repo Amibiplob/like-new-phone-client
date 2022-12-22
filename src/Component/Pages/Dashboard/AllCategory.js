@@ -18,7 +18,7 @@ const AllCategory = () => {
         {allCategory.map((data) => (
           <Link
             to={`../allproduct/${data.ProductCategory}`}
-            key={data.id}
+            key={data._id}
             className="card card-compact w-60 bg-base-100 shadow-2xl"
           >
             <figure className="px-5 pt-5">

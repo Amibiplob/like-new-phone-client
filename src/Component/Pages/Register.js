@@ -65,6 +65,7 @@ const Register = () => {
            ProfilePic: imgUrl,
            ProviderId: user.providerId,
            userRole: userRole,
+           adminVerify: "false",
            UID: user.uid,
          };
 

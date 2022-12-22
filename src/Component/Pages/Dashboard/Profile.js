@@ -32,14 +32,23 @@ const Profile = () => {
           <div className="flex gap-1">
             <h1 className="text-3xl">Name : {displayName}</h1>
             {emailVerified && (
-              <div className="tooltip" data-tip="verify">
+              <div className="tooltip" data-tip="Firebase Verify">
                 <CheckBadgeIcon className="h-5 w-5 text-blue-500" />
               </div>
             )}
-
-            <div className="tooltip" data-tip="Verify">
-              <CheckBadgeIcon className="h-5 w-5 text-green-800" />
-            </div>
+            {dbUser[0] && (
+              <>
+                {dbUser.map((data) => (
+                  <div key={data._id}>
+                    {data.adminVerify === "true" && (
+                      <div className="tooltip" data-tip="Admin Verify">
+                        <CheckBadgeIcon className="h-5 w-5 text-green-800" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )}
           </div>
           {email ? <h1>Email : {email}</h1> : <h1>Email : Not Found</h1>}
           <h1>UID : {uid}</h1>
@@ -58,9 +67,15 @@ const Profile = () => {
             </h1>
           )}
 
-          {dbUser.map((data) => (
-            <h1 key={data.userRole}>Your Account: {data.userRole}</h1>
-          ))}
+          {dbUser[0] ? (
+            <>
+              {dbUser.map((data) => (
+                <h1 key={data.userRole}>Your Account: {data.userRole}</h1>
+              ))}
+            </>
+          ) : (
+            <h1>Your Account: Normal</h1>
+          )}
         </div>
       </div>
     </div>

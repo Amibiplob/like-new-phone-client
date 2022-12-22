@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <div className="md:mx-10">
+    <div className="md:mx-10" data-theme="dark">
       <ToastContainer
         position="top-center"
         hideProgressBar={false}
